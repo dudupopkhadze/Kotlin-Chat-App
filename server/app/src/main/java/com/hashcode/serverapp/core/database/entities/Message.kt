@@ -7,6 +7,7 @@ import java.util.*
 @Entity(tableName = "messages")
 data class Message(
     @PrimaryKey(autoGenerate = true) val messageId: Long,
+    @ColumnInfo(name = "conversationId") val conversationId:Long,
     @ColumnInfo(name = "text") val text:String,
     @ColumnInfo(name = "sender_id") val sender_id:Int,
     @ColumnInfo(name = "sender_id") val receiver_id:Int,
