@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2c4b757-4095-40d9-be6f-9c45664cb274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/ConversationWithMessages.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/UserConversationCrossRef.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/UserWithConversations.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/Message.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/Message.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/User.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
