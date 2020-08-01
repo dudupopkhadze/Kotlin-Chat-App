@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 import java.util.*
 @Entity(tableName = "messages")
 data class Message(
-    @PrimaryKey(autoGenerate = true) val messageId: Long,
+    @PrimaryKey(autoGenerate = true) val messageId: Long = 0,
     val conversationId:Long,
     val text:String,
     val sender_id:Int,
     val receiver_id:Int,
-    val send_date:Date
+    val send_date:String
 )

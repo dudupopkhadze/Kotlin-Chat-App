@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "users")
 data class User (
-    @PrimaryKey(autoGenerate = true) val userId: Long,
-    val nickName: String?,
-    val status: String?,
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val profileImage:ByteArray?
+    @PrimaryKey(autoGenerate = true) val userId: Long = 0,
+    val nickName: String,
+    val status: String,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val profileImage:ByteArray? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -30,8 +30,8 @@ data class User (
 
     override fun hashCode(): Int {
         var result = userId.hashCode()
-        result = 31 * result + (nickName?.hashCode() ?: 0)
-        result = 31 * result + (status?.hashCode() ?: 0)
+        result = 31 * result + (nickName.hashCode())
+        result = 31 * result + (status.hashCode())
         result = 31 * result + (profileImage?.contentHashCode() ?: 0)
         return result
     }

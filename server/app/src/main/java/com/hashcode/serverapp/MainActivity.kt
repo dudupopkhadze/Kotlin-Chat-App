@@ -1,12 +1,20 @@
 package com.hashcode.serverapp
 
 import android.os.Bundle
+import android.os.Debug
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
+import com.google.gson.Gson
+import com.hashcode.serverapp.core.database.AppDatabase
+import com.hashcode.serverapp.core.database.entities.User
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
 import com.sun.net.httpserver.HttpServer
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
@@ -63,6 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startServer(port: Int) {
         try {
+            Log.println(Log.DEBUG,"blaa","blaaaaaaaaa")
             mHttpServer = HttpServer.create(InetSocketAddress(port), 0)
             mHttpServer!!.executor = Executors.newCachedThreadPool()
 
@@ -70,6 +79,9 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.createContext("/index", rootHandler)
             // Handle /messages endpoint
             mHttpServer!!.createContext("/messages", messageHandler)
+
+            mHttpServer!!.createContext("/users/get", getUsers)
+            mHttpServer!!.createContext("/users/add", addManyTestUsers)
             mHttpServer!!.start()//startServer server;
             serverTextView.text = getString(R.string.server_running)
             serverButton.text = getString(R.string.stop_server)
@@ -86,6 +98,40 @@ class MainActivity : AppCompatActivity() {
             serverButton.text = getString(R.string.start_server)
         }
     }
+
+    // Handler for root endpoint
+    private val addManyTestUsers = HttpHandler { exchange ->
+        run {
+            // Get request method
+            when (exchange!!.requestMethod) {
+                "POST" -> {
+
+                    GlobalScope.launch {  AppDatabase.getInstance(applicationContext).userDao().insertUser(user = User(nickName = "ducki",status = "vgulaof"))}
+                    sendResponse(exchange, "done")
+                }
+
+            }
+        }
+
+    }
+
+    private val getUsers = HttpHandler { exchange ->
+        run {
+            // Get request method
+            when (exchange!!.requestMethod) {
+                "GET" -> {
+                    val users = AppDatabase.getInstance(applicationContext)
+                        .userDao()
+                        .getAll()
+                    Log.println(Log.INFO,"user",users[0].nickName)
+                    val toJson = Gson().toJson(users)
+                    sendResponse(exchange, toJson.toString())
+                }
+
+            }
+        }
+    }
+
 
     // Handler for root endpoint
     private val rootHandler = HttpHandler { exchange ->
