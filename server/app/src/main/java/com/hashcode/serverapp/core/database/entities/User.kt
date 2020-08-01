@@ -8,5 +8,31 @@ import androidx.room.PrimaryKey
 data class User (
     @PrimaryKey(autoGenerate = true) val userId: Long,
     val nickName: String?,
-    val status: String?
-)
+    val status: String?,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val profileImage:ByteArray?
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as User
+
+        if (userId != other.userId) return false
+        if (nickName != other.nickName) return false
+        if (status != other.status) return false
+        if (profileImage != null) {
+            if (other.profileImage == null) return false
+            if (!profileImage.contentEquals(other.profileImage)) return false
+        } else if (other.profileImage != null) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = userId.hashCode()
+        result = 31 * result + (nickName?.hashCode() ?: 0)
+        result = 31 * result + (status?.hashCode() ?: 0)
+        result = 31 * result + (profileImage?.contentHashCode() ?: 0)
+        return result
+    }
+}
