@@ -1,11 +1,11 @@
 package com.hashcode.serverapp
 
 import android.os.Bundle
-import android.os.Debug
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import com.google.gson.Gson
+import com.hashcode.serverapp.core.api.UserController
 import com.hashcode.serverapp.core.database.AppDatabase
 import com.hashcode.serverapp.core.database.entities.User
 import com.sun.net.httpserver.HttpExchange
@@ -14,7 +14,6 @@ import com.sun.net.httpserver.HttpServer
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
@@ -26,10 +25,12 @@ import java.util.concurrent.Executors
 class MainActivity : AppCompatActivity() {
 
     private var serverUp = false
+    private lateinit var userController: UserController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        userController= UserController(applicationContext)
         setSupportActionBar(toolbar)
         val port = 5000
 
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.createContext("/messages", messageHandler)
 
             mHttpServer!!.createContext("/users/get", getUsers)
-            mHttpServer!!.createContext("/users/add", addManyTestUsers)
+            mHttpServer!!.createContext("/users/add", userController.insertUser)
             mHttpServer!!.start()//startServer server;
             serverTextView.text = getString(R.string.server_running)
             serverButton.text = getString(R.string.stop_server)

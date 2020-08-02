@@ -3,14 +3,18 @@ package com.hashcode.serverapp.core.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "users")
 data class User (
     @PrimaryKey(autoGenerate = true) val userId: Long = 0,
+    @SerializedName("nickName")
     val nickName: String,
+    @SerializedName("status")
     val status: String,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val profileImage:ByteArray? = null
 ) {
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -34,5 +38,9 @@ data class User (
         result = 31 * result + (status.hashCode())
         result = 31 * result + (profileImage?.contentHashCode() ?: 0)
         return result
+    }
+
+    override fun toString(): String {
+        return "User(userId=$userId, nickName='$nickName', status='$status', profileImage=${profileImage?.contentToString()})"
     }
 }

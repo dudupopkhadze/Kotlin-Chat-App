@@ -11,5 +11,5 @@ data class Message(
     val text:String,
     val sender_id:Int,
     val receiver_id:Int,
-    val send_date:String
+    val send_date:Date
 )

@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.hashcode.serverapp.core.database.converters.DateConverter
 import com.hashcode.serverapp.core.database.daos.ConversationDao
 import com.hashcode.serverapp.core.database.daos.MessageDao
 import com.hashcode.serverapp.core.database.daos.UserDao
@@ -14,6 +16,7 @@ import com.hashcode.serverapp.core.database.entities.UserConversationCrossRef
 import java.lang.ref.WeakReference
 
 @Database(entities = [User::class, Message::class, Conversation::class, UserConversationCrossRef::class],version = 1)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase :RoomDatabase(){
 
     companion object {
