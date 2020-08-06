@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.createContext("/", rootHandler)
             mHttpServer!!.createContext("/index", rootHandler)
             mHttpServer!!.createContext("/messages", messageHandler)
-            mHttpServer!!.createContext("/users/get", getUsers)
+            mHttpServer!!.createContext("/users/get", userController.getAllUsers)
             mHttpServer!!.createContext("/users/get-by-id", userController.getById)
             mHttpServer!!.createContext("/users/add", userController.create)
             mHttpServer!!.start()//startServer server;
@@ -96,40 +96,6 @@ class MainActivity : AppCompatActivity() {
             serverButton.text = getString(R.string.start_server)
         }
     }
-
-    // Handler for root endpoint
-    private val addManyTestUsers = HttpHandler { exchange ->
-        run {
-            // Get request method
-            when (exchange!!.requestMethod) {
-                "POST" -> {
-
-                    GlobalScope.launch {  AppDatabase.getInstance(applicationContext).userDao().insertUser(user = User(nickName = "ducki",status = "vgulaof"))}
-                    sendResponse(exchange, "done")
-                }
-
-            }
-        }
-
-    }
-
-    private val getUsers = HttpHandler { exchange ->
-        run {
-            // Get request method
-            when (exchange!!.requestMethod) {
-                "GET" -> {
-                    val users = AppDatabase.getInstance(applicationContext)
-                        .userDao()
-                        .getAll()
-                    Log.println(Log.INFO,"user",users[0].nickName)
-                    val toJson = Gson().toJson(users)
-                    sendResponse(exchange, toJson.toString())
-                }
-
-            }
-        }
-    }
-
 
     // Handler for root endpoint
     private val rootHandler = HttpHandler { exchange ->

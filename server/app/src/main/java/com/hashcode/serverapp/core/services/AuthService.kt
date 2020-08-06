@@ -1,32 +1,26 @@
 package com.hashcode.serverapp.core.services
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import com.hashcode.serverapp.core.database.entities.User
-import io.fusionauth.jwt.Signer
-import io.fusionauth.jwt.Verifier
-import io.fusionauth.jwt.domain.JWT
-import io.fusionauth.jwt.hmac.HMACSigner
-import io.fusionauth.jwt.hmac.HMACVerifier
-import java.time.ZonedDateTime
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
+import io.jsonwebtoken.io.Decoders
+import io.jsonwebtoken.io.Encoders
+import io.jsonwebtoken.security.Keys
+import javax.crypto.SecretKey
 
 
 object AuthService {
-    private val KEY = "Super Duper Secret Key"
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun generateAccessToken(user:User): String {
-        val signer: Signer = HMACSigner.newSHA256Signer(KEY)
+    private const val KEY = "IrAl42feVTUeu8TFSFDLmabfhVLU+8NR6TxFeah9Y7U="
+    private var key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(KEY))
 
-        val jwt = JWT().setSubject(Gson().toJson(user).toString()).setExpiration(ZonedDateTime.now().plusDays(300))
-        return JWT.getEncoder().encode(jwt, signer);
+    fun generateAccessToken(user:User): String {
+        return Jwts.builder().setSubject(Gson().toJson(user)).signWith(key).compact()
     }
 
     fun getUserFromAccessToken(token:String):User{
-        val verifier: Verifier = HMACVerifier.newVerifier("too many secrets")
-
-        val jwt: JWT = JWT.getDecoder().decode(token, verifier)
-        return Gson().fromJson(JsonParser().parse(jwt.subject).asJsonObject,User::class.java) as User
+        val parsed = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).body.subject
+        return Gson().fromJson(parsed,User::class.java) as User
     }
 }
