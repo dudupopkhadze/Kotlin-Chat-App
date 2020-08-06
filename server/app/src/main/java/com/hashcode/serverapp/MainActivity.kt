@@ -72,17 +72,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun startServer(port: Int) {
         try {
-            Log.println(Log.DEBUG,"blaa","blaaaaaaaaa")
             mHttpServer = HttpServer.create(InetSocketAddress(port), 0)
             mHttpServer!!.executor = Executors.newCachedThreadPool()
-
             mHttpServer!!.createContext("/", rootHandler)
             mHttpServer!!.createContext("/index", rootHandler)
-            // Handle /messages endpoint
             mHttpServer!!.createContext("/messages", messageHandler)
-
             mHttpServer!!.createContext("/users/get", getUsers)
-            mHttpServer!!.createContext("/users/add", userController.insertUser)
+            mHttpServer!!.createContext("/users/get-by-id", userController.getById)
+            mHttpServer!!.createContext("/users/add", userController.create)
             mHttpServer!!.start()//startServer server;
             serverTextView.text = getString(R.string.server_running)
             serverButton.text = getString(R.string.stop_server)

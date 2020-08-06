@@ -15,49 +15,62 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.hashcode.serverapp.core.services.AuthService
+import com.hashcode.serverapp.core.services.UserService
+import com.hashcode.serverapp.core.utils.RequestBodyParser
+import com.hashcode.serverapp.core.utils.ValidateRequestBody
 import com.sun.net.httpserver.Headers
+import com.sun.net.httpserver.HttpExchange
 import org.json.JSONObject
 import java.io.InputStream
 import java.util.*
 
-class UserController( context:Context) {
-    @RequiresApi(Build.VERSION_CODES.O)
-    val insertUser = HttpHandler { exchange ->
+class UserController(private val context: Context) {
+    val create = HttpHandler { exchange ->
         run {
             // Get request method
             when (exchange!!.requestMethod) {
-                "POST" -> {
-                    GlobalScope.launch {
-                        Log.println(Log.DEBUG,"user","post")
-                        val inputStream = exchange.requestBody
-
-                        var requestBody = streamToString(inputStream)
-                        val gson  = Gson()
-                        val jsonBody = gson.toJson(requestBody.trim())
-                        Log.println(Log.DEBUG,"user",jsonBody)
-                        Log.println(Log.DEBUG,"user",requestBody.length.toString())
-
-                        val user = gson.fromJson(jsonBody,User::class.java)
-                        Log.println(Log.DEBUG,"user",user.toString())
-
-//                            AppDatabase.getInstance(context)
-//                                .userDao()
-//                                .insertUser(user)
-//                        val headers = Headers()
-//                        headers.add("access-token",AuthService().generateAccessToken(user))
-                        Response().sendResponse(exchange, 200,"done")
-                    }
-                }
-
-
-                else -> return@HttpHandler
+                "POST" -> createUser(exchange)
+                else -> Response.badRequestResponse(exchange)
             }
         }
 
     }
 
-    private fun streamToString(inputStream: InputStream): String {
-        val s = Scanner(inputStream).useDelimiter("\\A")
-        return if (s.hasNext()) s.next() else ""
+    val getById = HttpHandler { exchange ->
+        run {
+            // Get request method
+            when (exchange!!.requestMethod) {
+                "GET" -> getUserById(exchange)
+                else -> Response.badRequestResponse(exchange)
+            }
+        }
+
     }
+
+    private fun getUserById(exchange: HttpExchange){
+        val id = RequestBodyParser().parseGetUserByIdRequest(exchange.requestBody)
+        if(id == null){
+            Response.notFoundResponse(exchange)
+            return
+        }
+        val user =  AppDatabase.getInstance(context).userDao().findById(id)
+        Response.successfulRequestResponse(exchange,Gson().toJson(user))
+    }
+
+
+
+    private fun createUser(exchange: HttpExchange){
+        val user = RequestBodyParser().parseCreateUserRequest(exchange.requestBody)
+        GlobalScope.launch {
+            if(user != null){
+                val id = AppDatabase.getInstance(context)
+                .userDao()
+                .insertUser(user)
+                Response.sendResponse(exchange, 200,Gson().toJson(UserService.copyUserWithNewId(id,user)))
+            }else{
+                Response.badRequestResponse(exchange)
+            }
+        }
+    }
+
 }

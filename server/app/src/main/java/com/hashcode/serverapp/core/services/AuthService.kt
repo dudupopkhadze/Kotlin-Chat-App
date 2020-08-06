@@ -13,7 +13,7 @@ import io.fusionauth.jwt.hmac.HMACVerifier
 import java.time.ZonedDateTime
 
 
-class AuthService {
+object AuthService {
     private val KEY = "Super Duper Secret Key"
     @RequiresApi(Build.VERSION_CODES.O)
     fun generateAccessToken(user:User): String {

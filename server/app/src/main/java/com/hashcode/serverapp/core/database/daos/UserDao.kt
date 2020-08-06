@@ -1,9 +1,6 @@
 package com.hashcode.serverapp.core.database.daos
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.hashcode.serverapp.core.database.entities.User
 import com.hashcode.serverapp.core.database.entities.UserWithConversations
 
@@ -22,8 +19,8 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE nickName LIKE :nickName LIMIT 1")
     fun findByName(nickName: String): User
 
-    @Insert
-    fun insertUser(user:User)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun  insertUser(user:User):Long
 
     @Delete
     fun deleteUser(user:User)

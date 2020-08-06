@@ -1,9 +1,6 @@
 package com.hashcode.serverapp.core.database.daos
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.hashcode.serverapp.core.database.entities.Message
 
 @Dao
@@ -11,8 +8,8 @@ interface MessageDao {
     @Query("SELECT * FROM messages")
     fun getAll():List<Message>
 
-    @Insert()
-    fun insertMessage(message: Message)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertMessage(message: Message):Long
 
     @Delete()
     fun deleteMessage(message: Message)

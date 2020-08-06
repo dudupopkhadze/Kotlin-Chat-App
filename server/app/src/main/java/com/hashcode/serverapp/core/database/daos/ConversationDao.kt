@@ -13,8 +13,8 @@ interface ConversationDao {
     @Query("SELECT * FROM conversations WHERE conversationId == :conversationId")
     fun getConversationWithMessages(conversationId:Long):List<ConversationWithMessages>
 
-    @Insert()
-    fun insertConversation(conversation: Conversation)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertConversation(conversation: Conversation):Long
 
     @Delete()
     fun deleteConversation(conversation: Conversation)
