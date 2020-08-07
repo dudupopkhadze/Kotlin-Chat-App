@@ -83,7 +83,7 @@ class UserController(private val context: Context) {
     }
 
     private fun getUserById(exchange: HttpExchange){
-        val id = RequestBodyParser().parseGetUserByIdRequest(exchange.requestBody)
+        val id = RequestBodyParser.parseGetUserByIdRequest(exchange.requestBody)
         if(id == null){
             Response.notFoundResponse(exchange)
             return
@@ -102,7 +102,7 @@ class UserController(private val context: Context) {
     }
 
     private fun createUser(exchange: HttpExchange){
-        val user = RequestBodyParser().parseCreateUserRequest(exchange.requestBody)
+        val user = RequestBodyParser.parseCreateUserRequest(exchange.requestBody)
         GlobalScope.launch {
             if(user != null){
                 val id = appDatabase.userDao().insertUser(user)

@@ -18,4 +18,8 @@ class AuthController {
             null
         }
     }
+
+    fun isAuthenticated(exchange: HttpExchange):Boolean{
+        return getUserFromToken(exchange) == null
+    }
 }

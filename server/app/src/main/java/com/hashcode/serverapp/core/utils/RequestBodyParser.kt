@@ -7,7 +7,7 @@ import java.io.InputStream
 import java.util.*
 
 
-class RequestBodyParser {
+object RequestBodyParser {
     fun parseCreateUserRequest(requestBody:InputStream): User? {
         val body = streamToString(requestBody)
         if(!ValidateRequestBody.isValidCreateUserRequest(body)){
@@ -23,6 +23,14 @@ class RequestBodyParser {
             return null
         }
         return getValueFromkey("userId",body).toLongOrNull()
+    }
+
+    fun parseDeleteConversationByIdRequest(requestBody:InputStream):Long?{
+        val body = streamToString(requestBody)
+        if(!ValidateRequestBody.isValidDeleteConversationByIdRequest(body)){
+            return null
+        }
+        return getValueFromkey("conversationId",body).toLongOrNull()
     }
 
     private fun getValueFromkey(key:String,json:String):String{

@@ -14,4 +14,8 @@ object ValidateRequestBody {
     fun isValidGetUserByIdRequest(requestBody: String):Boolean{
         return requestBody.contains("userId")
     }
+
+    fun isValidDeleteConversationByIdRequest(requestBody: String):Boolean{
+        return requestBody.contains("conversationId")
+    }
 }
