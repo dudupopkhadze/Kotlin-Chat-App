@@ -18,10 +18,10 @@ import java.util.concurrent.Executors
 
 
 class MainActivity : AppCompatActivity() {
-
     private var serverUp = false
     private lateinit var userController: UserController
     private lateinit var conversationController: ConversationController
+    private var mHttpServer: HttpServer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,16 +41,12 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-
-
 
     private fun streamToString(inputStream: InputStream): String {
         val s = Scanner(inputStream).useDelimiter("\\A")
@@ -64,9 +60,6 @@ class MainActivity : AppCompatActivity() {
         os.close()
     }
 
-    private var mHttpServer: HttpServer? = null
-
-
     private fun startServer(port: Int) {
         try {
             mHttpServer = HttpServer.create(InetSocketAddress(port), 0)
@@ -75,21 +68,22 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.createContext("/index", rootHandler)
             mHttpServer!!.createContext("/messages", messageHandler)
 
+            //convos stuff
             mHttpServer!!.createContext("/convos/delete", conversationController.delete)
 
-
-
+            //users stuff
             mHttpServer!!.createContext("/get-history",userController.getUserHistory)
             mHttpServer!!.createContext("/users/get", userController.getAllUsers)
             mHttpServer!!.createContext("/users/get-by-id", userController.getById)
             mHttpServer!!.createContext("/users/add", userController.create)
+
+            //start server
             mHttpServer!!.start()//startServer server;
             serverTextView.text = getString(R.string.server_running)
             serverButton.text = getString(R.string.stop_server)
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
     }
 
     private fun stopServer() {
@@ -132,7 +126,6 @@ class MainActivity : AppCompatActivity() {
                     sendResponse(httpExchange, jsonBody.toString())
 
                 }
-
             }
         }
     }
