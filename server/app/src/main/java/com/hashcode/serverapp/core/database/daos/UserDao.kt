@@ -14,7 +14,7 @@ interface UserDao {
 
 
     @Query("SELECT * FROM  users WHERE userId == :userId")
-    fun getUserWithConversations(userId:Long):List<UserWithConversations>
+    fun getUserWithConversations(userId:Long):UserWithConversations
 
     @Query("SELECT * FROM users WHERE nickName LIKE :nickName LIMIT 1")
     fun findByName(nickName: String): User

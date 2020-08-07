@@ -2,6 +2,7 @@ package com.hashcode.serverapp.core.api
 
 import com.sun.net.httpserver.Headers
 import com.sun.net.httpserver.HttpExchange
+import kotlin.system.exitProcess
 
 object Response {
     fun sendResponse(httpExchange: HttpExchange, responseCode:Int, responseText: String,headers: Headers? = null){
@@ -24,5 +25,9 @@ object Response {
 
     fun successfulRequestResponse(httpExchange: HttpExchange,  responseText: String,headers: Headers? = null){
         sendResponse(httpExchange,200,responseText,headers)
+    }
+
+    fun notAuthenticatedResponse(httpExchange: HttpExchange){
+        sendResponse(httpExchange,401,"Not Authorized")
     }
 }

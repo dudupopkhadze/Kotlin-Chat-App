@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.createContext("/", rootHandler)
             mHttpServer!!.createContext("/index", rootHandler)
             mHttpServer!!.createContext("/messages", messageHandler)
+            mHttpServer!!.createContext("/get-history",userController.getUserHistory)
             mHttpServer!!.createContext("/users/get", userController.getAllUsers)
             mHttpServer!!.createContext("/users/get-by-id", userController.getById)
             mHttpServer!!.createContext("/users/add", userController.create)

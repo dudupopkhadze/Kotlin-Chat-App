@@ -11,5 +11,5 @@ data class UserWithConversations(
         entityColumn = "conversationId",
         associateBy = Junction(UserConversationCrossRef::class)
     )
-    val songs: List<Conversation>
+    val conversations: List<Conversation>
 )

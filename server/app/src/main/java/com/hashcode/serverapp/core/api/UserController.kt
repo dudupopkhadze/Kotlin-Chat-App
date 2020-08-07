@@ -12,6 +12,8 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.hashcode.serverapp.core.pojos.ConversationPreview
+import com.hashcode.serverapp.core.pojos.UserConversationsHistory
 import com.hashcode.serverapp.core.services.AuthService
 import com.hashcode.serverapp.core.services.UserService
 import com.hashcode.serverapp.core.utils.RequestBodyParser
@@ -53,8 +55,34 @@ class UserController(private val context: Context) {
         }
     }
 
-    private fun getUserById(exchange: HttpExchange){
+    val getUserHistory = HttpHandler { exchange ->
+        run {
+            when (exchange!!.requestMethod) {
+                "GET" -> getUserConversationsHistory(exchange)
+                else -> Response.badRequestResponse(exchange)
+            }
+        }
+    }
 
+    private fun getUserConversationsHistory(exchange:HttpExchange){
+        val user = AuthController().getUserFromToken(exchange)
+        if(user == null){
+            Response.notAuthenticatedResponse(exchange)
+            return
+        }
+        GlobalScope.launch {
+            val userWithConversations = appDatabase.userDao().getUserWithConversations(user.userId)
+            val convosHistory = mutableListOf<ConversationPreview>()
+            userWithConversations.conversations.forEach {
+                val convosWithMessages = appDatabase.conversationDao().getConversationWithMessages(it.conversationId)
+                convosHistory.add(ConversationPreview(conversation = it,
+                    lastMessage = convosWithMessages.messages[convosWithMessages.messages.lastIndex].text))
+            }
+            Response.successfulRequestResponse(exchange,Gson().toJson(UserConversationsHistory(user,convosHistory)))
+        }
+    }
+
+    private fun getUserById(exchange: HttpExchange){
         val id = RequestBodyParser().parseGetUserByIdRequest(exchange.requestBody)
         if(id == null){
             Response.notFoundResponse(exchange)
