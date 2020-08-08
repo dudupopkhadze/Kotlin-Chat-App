@@ -36,4 +36,7 @@ class ConversationController(private val context: Context) {
             Response.successfulRequestResponse(exchange,"Deleted")
         }
     }
+    private fun sendMessage(exchange: HttpExchange){
+
+    }
 }

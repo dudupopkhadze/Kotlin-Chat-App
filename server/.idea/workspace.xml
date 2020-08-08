@@ -6,15 +6,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c4b757-4095-40d9-be6f-9c45664cb274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/ConversationController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/PostSendMessage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/pojos/UserWithToken.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/AuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/AuthController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/ConversationController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/ConversationController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/UserController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/ConversationDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/ConversationDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/ValidateRequestBody.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/ValidateRequestBody.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +178,21 @@
       <option name="project" value="LOCAL" />
       <updated>1596837887444</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add delete conversation endpoint">
+      <created>1596839168749</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1596839168749</updated>
+    </task>
+    <task id="LOCAL-00008" summary="orginize code">
+      <created>1596839259324</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1596839259324</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -192,7 +203,9 @@
     <MESSAGE value="implement custom parser and validator" />
     <MESSAGE value="add jwt auth" />
     <MESSAGE value="get user from headers" />
-    <option name="LAST_COMMIT_MESSAGE" value="get user from headers" />
+    <MESSAGE value="add delete conversation endpoint" />
+    <MESSAGE value="orginize code" />
+    <option name="LAST_COMMIT_MESSAGE" value="orginize code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Auto_Import" timestamp="1596836521429">
@@ -211,11 +224,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="540" y="65" width="499" height="694" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1596228086502" />
-    <state x="331" y="7" key="CommitChangelistDialog2" timestamp="1596839167734">
+    <state x="331" y="7" key="CommitChangelistDialog2" timestamp="1596839258455">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596280876447" />
-    <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1596839167734" />
+    <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1596839258455" />
     <state x="549" y="154" key="FileChooserDialogImpl" timestamp="1596279199279">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -245,11 +258,11 @@
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596275915466" />
     <state x="46" y="42" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596752344021" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596837984700">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596839261467">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596280884241" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596837984700" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596839261467" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1596753622898">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

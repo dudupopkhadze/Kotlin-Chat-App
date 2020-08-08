@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.hashcode.serverapp.core.pojos.ConversationPreview
 import com.hashcode.serverapp.core.pojos.UserConversationsHistory
+import com.hashcode.serverapp.core.pojos.UserWithToken
 import com.hashcode.serverapp.core.services.AuthService
 import com.hashcode.serverapp.core.services.UserService
 import com.hashcode.serverapp.core.utils.RequestBodyParser
@@ -106,7 +107,10 @@ class UserController(private val context: Context) {
         GlobalScope.launch {
             if(user != null){
                 val id = appDatabase.userDao().insertUser(user)
-                Response.sendResponse(exchange, 200,Gson().toJson(UserService.copyUserWithNewId(id,user)))
+                val newUser = UserService.copyUserWithNewId(id,user)
+                Response.sendResponse(exchange, 200,
+                    Gson().toJson(UserWithToken(user=newUser,
+                         accessToken = AuthService.generateAccessToken(newUser))))
             }else{
                 Response.badRequestResponse(exchange)
             }
