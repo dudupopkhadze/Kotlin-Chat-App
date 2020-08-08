@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">client</string>
+    <string name="connection">Checking connection</string>
+    <string name="nickname">Enter your nickname</string>
+    <string name="start">Start</string>
+    <string name="ido">What I do</string>
 </resources>
