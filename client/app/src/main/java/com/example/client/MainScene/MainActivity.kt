@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), MainSceneContract.View {
         val username = presenter.getUsername(pref)
 
         if(username.isEmpty()){
-            val intent = Intent(this, IntroduceActivity::class.java)
+            val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
         } else{
             val intent = Intent(this, MessageActivity::class.java)
