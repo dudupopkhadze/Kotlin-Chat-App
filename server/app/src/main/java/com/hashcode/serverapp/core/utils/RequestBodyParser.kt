@@ -13,8 +13,13 @@ object RequestBodyParser {
         if(!ValidateRequestBody.isValidCreateUserRequest(body)){
             return null
         }
-        return  User(nickName = getValueFromkey("nickName",body),
-               status = getValueFromkey("status",body));
+        return if(body.contains("profileImage")){
+            User(nickName = getValueFromkey("nickName",body),
+                status = getValueFromkey("status",body),profileImage = getValueFromkey("profileImage",body))
+        } else {
+            User(nickName = getValueFromkey("nickName",body),
+                status = getValueFromkey("status",body))
+        };
     }
 
     fun parseGetUserByIdRequest(requestBody:InputStream):Long?{

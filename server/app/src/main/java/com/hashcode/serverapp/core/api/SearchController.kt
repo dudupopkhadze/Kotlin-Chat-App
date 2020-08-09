@@ -1,10 +1,13 @@
 package com.hashcode.serverapp.core.api
 
 import android.content.Context
+import com.hashcode.serverapp.core.api.schemas.responses.UserWithLastMessage
 import com.hashcode.serverapp.core.database.AppDatabase
 import com.hashcode.serverapp.core.utils.RequestBodyParser
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SearchController (private val context: Context) {
     private val appDatabase = AppDatabase.getInstance(context)
@@ -25,6 +28,12 @@ class SearchController (private val context: Context) {
             return
         }
         val sqlQuery ="%$query%"
-        val res = appDatabase.userDao().findByName(sqlQuery)
+        GlobalScope.launch {
+            val result = mutableListOf<UserWithLastMessage>()
+            val users = appDatabase.userDao().findByName(sqlQuery)
+
+
+        }
+
     }
 }

@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 @Entity(tableName = "users")
 data class User (
@@ -12,35 +13,5 @@ data class User (
     val nickName: String,
     @SerializedName("status")
     val status: String,
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val profileImage:ByteArray? = null
-) {
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as User
-
-        if (userId != other.userId) return false
-        if (nickName != other.nickName) return false
-        if (status != other.status) return false
-        if (profileImage != null) {
-            if (other.profileImage == null) return false
-            if (!profileImage.contentEquals(other.profileImage)) return false
-        } else if (other.profileImage != null) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = userId.hashCode()
-        result = 31 * result + (nickName.hashCode())
-        result = 31 * result + (status.hashCode())
-        result = 31 * result + (profileImage?.contentHashCode() ?: 0)
-        return result
-    }
-
-    override fun toString(): String {
-        return "User(userId=$userId, nickName='$nickName', status='$status', profileImage=${profileImage?.contentToString()})"
-    }
-}
+    val profileImage:String? = null
+)
