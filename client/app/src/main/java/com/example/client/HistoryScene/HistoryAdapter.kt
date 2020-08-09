@@ -1,9 +1,10 @@
-package com.example.client
+package com.example.client.HistoryScene
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.client.R
 import kotlinx.android.synthetic.main.history_cell.view.*
 
 class HistoryAdapter: RecyclerView.Adapter<CustomViewHolder>() {
