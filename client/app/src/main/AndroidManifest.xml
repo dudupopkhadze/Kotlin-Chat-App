@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MessageScene.MessageActivity"></activity>
+        <activity android:name=".MessageScene.MessageMainActivity"></activity>
+        <activity android:name=".MessageScene.MessageActivity" />
         <activity android:name=".HistoryScene.HistoryActivity" />
         <activity android:name=".IntroduceScene.IntroduceActivity" />
         <activity android:name=".MainScene.MainActivity">
