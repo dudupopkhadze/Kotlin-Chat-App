@@ -1,29 +1,19 @@
 package com.hashcode.serverapp.core.api
 
 import com.hashcode.serverapp.core.database.AppDatabase
-import com.hashcode.serverapp.core.database.entities.User
 import com.sun.net.httpserver.HttpHandler
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 import android.content.Context
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.hashcode.serverapp.core.pojos.ConversationPreview
-import com.hashcode.serverapp.core.pojos.UserConversationsHistory
-import com.hashcode.serverapp.core.pojos.UserWithToken
+import com.hashcode.serverapp.core.api.schemas.responses.ConversationPreview
+import com.hashcode.serverapp.core.api.schemas.responses.UserConversationsHistory
+import com.hashcode.serverapp.core.api.schemas.responses.UserWithToken
 import com.hashcode.serverapp.core.services.AuthService
 import com.hashcode.serverapp.core.services.UserService
 import com.hashcode.serverapp.core.utils.RequestBodyParser
-import com.hashcode.serverapp.core.utils.ValidateRequestBody
-import com.sun.net.httpserver.Headers
 import com.sun.net.httpserver.HttpExchange
-import org.json.JSONObject
-import java.io.InputStream
-import java.util.*
 
 class UserController(private val context: Context) {
     private val appDatabase = AppDatabase.getInstance(context)
@@ -76,10 +66,19 @@ class UserController(private val context: Context) {
             val convosHistory = mutableListOf<ConversationPreview>()
             userWithConversations.conversations.forEach {
                 val convosWithMessages = appDatabase.conversationDao().getConversationWithMessages(it.conversationId)
-                convosHistory.add(ConversationPreview(conversation = it,
-                    lastMessage = convosWithMessages.messages[convosWithMessages.messages.lastIndex].text))
+                convosHistory.add(
+                    ConversationPreview(
+                        conversation = it,
+                        lastMessage = convosWithMessages.messages[convosWithMessages.messages.lastIndex].text
+                    )
+                )
             }
-            Response.successfulRequestResponse(exchange,Gson().toJson(UserConversationsHistory(user,convosHistory)))
+            Response.successfulRequestResponse(exchange,Gson().toJson(
+                UserConversationsHistory(
+                    user,
+                    convosHistory
+                )
+            ))
         }
     }
 
@@ -109,8 +108,12 @@ class UserController(private val context: Context) {
                 val id = appDatabase.userDao().insertUser(user)
                 val newUser = UserService.copyUserWithNewId(id,user)
                 Response.sendResponse(exchange, 200,
-                    Gson().toJson(UserWithToken(user=newUser,
-                         accessToken = AuthService.generateAccessToken(newUser))))
+                    Gson().toJson(
+                        UserWithToken(
+                            user = newUser,
+                            accessToken = AuthService.generateAccessToken(newUser)
+                        )
+                    ))
             }else{
                 Response.badRequestResponse(exchange)
             }

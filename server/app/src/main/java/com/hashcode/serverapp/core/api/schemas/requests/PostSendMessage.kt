@@ -1,4 +1,4 @@
-package com.hashcode.serverapp.core.api.schemas
+package com.hashcode.serverapp.core.api.schemas.requests
 
 data class PostSendMessage(
     val conversationId:Long? = null,

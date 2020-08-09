@@ -11,6 +11,10 @@ object ValidateRequestBody {
         return true
     }
 
+    fun isValidSearchWithNicknameRequest(requestBody: String):Boolean{
+        return requestBody.contains("query")
+    }
+
     fun isValidGetUserByIdRequest(requestBody: String):Boolean{
         return requestBody.contains("userId")
     }

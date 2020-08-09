@@ -25,6 +25,14 @@ object RequestBodyParser {
         return getValueFromkey("userId",body).toLongOrNull()
     }
 
+    fun parseSearchWithNickname(requestBody: InputStream):String?{
+        val body = streamToString(requestBody)
+        if(!ValidateRequestBody.isValidSearchWithNicknameRequest(body)){
+            return null
+        }
+        return getValueFromkey("query",body)
+    }
+
     fun parseDeleteConversationByIdRequest(requestBody:InputStream):Long?{
         val body = streamToString(requestBody)
         if(!ValidateRequestBody.isValidDeleteConversationByIdRequest(body)){

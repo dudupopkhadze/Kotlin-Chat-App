@@ -16,7 +16,7 @@ interface UserDao {
     @Query("SELECT * FROM  users WHERE userId == :userId")
     fun getUserWithConversations(userId:Long):UserWithConversations
 
-    @Query("SELECT * FROM users WHERE nickName LIKE :nickName LIMIT 1")
+    @Query("SELECT * FROM users WHERE nickName LIKE :nickName")
     fun findByName(nickName: String): User
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

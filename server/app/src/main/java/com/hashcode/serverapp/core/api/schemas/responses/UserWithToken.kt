@@ -1,4 +1,4 @@
-package com.hashcode.serverapp.core.pojos
+package com.hashcode.serverapp.core.api.schemas.responses
 
 import com.hashcode.serverapp.core.database.entities.User
 

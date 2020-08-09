@@ -1,5 +1,6 @@
-package com.hashcode.serverapp.core.pojos
+package com.hashcode.serverapp.core.api.schemas.responses
 
+import com.hashcode.serverapp.core.api.schemas.responses.ConversationPreview
 import com.hashcode.serverapp.core.database.entities.User
 
 data class UserConversationsHistory (

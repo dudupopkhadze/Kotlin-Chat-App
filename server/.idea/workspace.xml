@@ -6,12 +6,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c4b757-4095-40d9-be6f-9c45664cb274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/PostSendMessage.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/pojos/UserWithToken.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/SearchController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/requests/GetSearchWithNickname.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/SearchResult.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/UserWithLastMessage.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/ConversationController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/ConversationController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/PostSendMessage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/requests/PostSendMessage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/pojos/ConversationPreview.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/ConversationPreview.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/pojos/UserConversationsHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/UserConversationsHistory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/pojos/UserWithToken.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/UserWithToken.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/ValidateRequestBody.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/ValidateRequestBody.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +68,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.hashcode.serverapp.core.api.schemas.responses" />
+      <recent name="com.hashcode.serverapp.core.api.schemas.requests" />
       <recent name="com.hashcode.serverapp.core.database.entities" />
       <recent name="com.hashcode.serverapp.core.database" />
     </key>
@@ -192,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596839259324</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="post send message schema">
+      <created>1596918208135</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1596918208135</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -205,7 +221,8 @@
     <MESSAGE value="get user from headers" />
     <MESSAGE value="add delete conversation endpoint" />
     <MESSAGE value="orginize code" />
-    <option name="LAST_COMMIT_MESSAGE" value="orginize code" />
+    <MESSAGE value="post send message schema" />
+    <option name="LAST_COMMIT_MESSAGE" value="post send message schema" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Auto_Import" timestamp="1596836521429">
@@ -220,15 +237,15 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="559" y="113" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596324130906" />
-    <state x="540" y="65" width="499" height="694" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1596228086502">
+    <state x="540" y="65" width="575" height="694" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1596961494496">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="540" y="65" width="499" height="694" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1596228086502" />
-    <state x="331" y="7" key="CommitChangelistDialog2" timestamp="1596839258455">
+    <state x="540" y="65" width="575" height="694" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1596961494496" />
+    <state x="331" y="7" key="CommitChangelistDialog2" timestamp="1596918207165">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596280876447" />
-    <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1596839258455" />
+    <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1596918207165" />
     <state x="549" y="154" key="FileChooserDialogImpl" timestamp="1596279199279">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -258,11 +275,11 @@
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596275915466" />
     <state x="46" y="42" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596752344021" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596839261467">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596918213795">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596280884241" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596839261467" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596918213795" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1596753622898">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
