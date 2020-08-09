@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import com.hashcode.serverapp.core.api.ConversationController
+import com.hashcode.serverapp.core.api.SearchController
 import com.hashcode.serverapp.core.api.UserController
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private var serverUp = false
     private lateinit var userController: UserController
     private lateinit var conversationController: ConversationController
+    private lateinit var searchController: SearchController
     private var mHttpServer: HttpServer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         userController= UserController(applicationContext)
         conversationController = ConversationController(applicationContext)
+        searchController = SearchController(applicationContext)
         setSupportActionBar(toolbar)
         val port = 5000
 
@@ -67,6 +70,9 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.createContext("/", rootHandler)
             mHttpServer!!.createContext("/index", rootHandler)
             mHttpServer!!.createContext("/messages", messageHandler)
+
+            //search
+            mHttpServer!!.createContext("/search", searchController.search)
 
             //convos stuff
             mHttpServer!!.createContext("/convos/delete", conversationController.delete)

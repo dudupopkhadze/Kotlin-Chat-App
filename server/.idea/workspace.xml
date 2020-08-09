@@ -6,17 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c4b757-4095-40d9-be6f-9c45664cb274" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/SearchController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/SearchController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/ConversationDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/ConversationDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/UserDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/UserDao.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596962992654</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add profile image">
+      <created>1597013438767</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1597013438767</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -228,7 +229,8 @@
     <MESSAGE value="orginize code" />
     <MESSAGE value="post send message schema" />
     <MESSAGE value="search concept" />
-    <option name="LAST_COMMIT_MESSAGE" value="search concept" />
+    <MESSAGE value="add profile image" />
+    <option name="LAST_COMMIT_MESSAGE" value="add profile image" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Auto_Import" timestamp="1596836521429">
@@ -251,11 +253,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="540" y="65" width="575" height="694" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1596961494496" />
-    <state x="0" y="7" key="CommitChangelistDialog2" timestamp="1596962991736">
+    <state x="0" y="7" key="CommitChangelistDialog2" timestamp="1597013437857">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596280876447" />
-    <state x="0" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1596962991736" />
+    <state x="0" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1597013437857" />
     <state x="549" y="154" key="FileChooserDialogImpl" timestamp="1596279199279">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

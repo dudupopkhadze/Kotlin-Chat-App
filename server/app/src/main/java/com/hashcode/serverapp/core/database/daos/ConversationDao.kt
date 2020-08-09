@@ -17,6 +17,9 @@ interface ConversationDao {
     @Query("SELECT * FROM conversations WHERE conversationId == :conversationId")
     fun getConversationWithMessages(conversationId:Long):ConversationWithMessages
 
+    @Query("SELECT * From conversations WHERE (firstUserId == :userOneId AND secondUserId==:secondUserId) OR (firstUserId == :secondUserId AND secondUserId==:userOneId)")
+    fun getConversationForTwoUsers(userOneId:Long, secondUserId:Long):Conversation
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertConversation(conversation: Conversation):Long
 

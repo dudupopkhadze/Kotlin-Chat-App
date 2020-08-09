@@ -17,7 +17,7 @@ interface UserDao {
     fun getUserWithConversations(userId:Long):UserWithConversations
 
     @Query("SELECT * FROM users WHERE nickName LIKE :nickName")
-    fun findByName(nickName: String): User
+    fun findByName(nickName: String):List<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun  insertUser(user:User):Long
