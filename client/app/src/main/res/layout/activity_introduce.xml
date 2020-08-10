@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntroduceActivity">
+    tools:context=".IntroduceScene.IntroduceActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/newavatar" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/startID"
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:layout_marginTop="32dp"
@@ -41,35 +41,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.74" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/usernameID"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usernameTextID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/login_field_shape"
             android:gravity="center"
             android:hint="@string/nickname"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:textColor="#9b9ea1"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/whatidoID"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -78,11 +83,14 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/whatidoTextID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/login_field_shape"
             android:gravity="center"
             android:hint="@string/ido"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:textColor="#9b9ea1"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -92,5 +100,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.625171" />
+        app:layout_constraintGuide_percent="0.65" />
 </androidx.constraintlayout.widget.ConstraintLayout>
