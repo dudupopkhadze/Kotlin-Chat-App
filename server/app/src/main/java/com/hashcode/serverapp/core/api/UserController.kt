@@ -86,12 +86,21 @@ class UserController(private val context: Context) {
                 userWithConversations?.conversations.forEach {
                     val convosWithMessages = appDatabase.conversationDao().getConversationWithMessages(it.conversationId)
                     if(convosWithMessages != null){
-                        convosHistory.add(
-                            ConversationPreview(
-                                conversation = it,
-                                lastMessage = convosWithMessages.messages[convosWithMessages.messages.lastIndex].text
+                        val otherUserId =
+                            if(user.userId == convosWithMessages.conversation.firstUserId)
+                                convosWithMessages.conversation.secondUserId
+                            else
+                                convosWithMessages.conversation.firstUserId
+                        val secondUser = appDatabase.userDao().findById(otherUserId)
+                        if(secondUser != null) {
+                            convosHistory.add(
+                                ConversationPreview(
+                                    conversation = it,
+                                    lastMessage = convosWithMessages.messages[convosWithMessages.messages.lastIndex].text,
+                                    secondUser = secondUser
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
