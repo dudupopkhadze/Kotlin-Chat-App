@@ -146,6 +146,7 @@ class UserController(private val context: Context) {
     }
 
     private fun createUser(exchange: HttpExchange){
+        Log.println(Log.DEBUG,"msdsg","asadfsdas")
         val user = RequestBodyParser.parseCreateUserRequest(exchange.requestBody)
         GlobalScope.launch {
             if(user != null){

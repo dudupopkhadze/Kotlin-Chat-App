@@ -1,5 +1,6 @@
 package com.hashcode.serverapp.core.utils
 
+import android.util.Log
 import com.hashcode.serverapp.core.api.schemas.requests.PostSendMessage
 import com.hashcode.serverapp.core.database.entities.User
 import java.io.InputStream
@@ -9,6 +10,7 @@ import java.util.*
 object RequestBodyParser {
     fun parseCreateUserRequest(requestBody:InputStream): User? {
         val body = streamToString(requestBody)
+        Log.println(Log.DEBUG,"msdsg",body)
         if(!ValidateRequestBody.isValidCreateUserRequest(body)){
             return null
         }

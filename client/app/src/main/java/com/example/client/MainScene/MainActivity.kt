@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.client.HistoryScene.HistoryActivity
 import com.example.client.IntroduceScene.IntroduceActivity
 import com.example.client.MessageScene.MessageActivity
 import com.example.client.R
@@ -26,10 +27,10 @@ class MainActivity : AppCompatActivity(), MainSceneContract.View {
         val username = presenter.getUsername(pref)
 
         if(username.isEmpty()){
-            val intent = Intent(this, MessageActivity::class.java)
+            val intent = Intent(this, IntroduceActivity::class.java)
             startActivity(intent)
         } else{
-            val intent = Intent(this, MessageActivity::class.java)
+            val intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
     }
