@@ -51,31 +51,19 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun streamToString(inputStream: InputStream): String {
-        val s = Scanner(inputStream).useDelimiter("\\A")
-        return if (s.hasNext()) s.next() else ""
-    }
-
-    private fun sendResponse(httpExchange: HttpExchange, responseText: String){
-        httpExchange.sendResponseHeaders(200, responseText.length.toLong())
-        val os = httpExchange.responseBody
-        os.write(responseText.toByteArray())
-        os.close()
-    }
-
     private fun startServer(port: Int) {
         try {
             mHttpServer = HttpServer.create(InetSocketAddress(port), 0)
             mHttpServer!!.executor = Executors.newCachedThreadPool()
-            mHttpServer!!.createContext("/", rootHandler)
             mHttpServer!!.createContext("/test", userController.test)
-            mHttpServer!!.createContext("/messages", messageHandler)
 
             //search
             mHttpServer!!.createContext("/search", searchController.search)
 
             //convos stuff
             mHttpServer!!.createContext("/convos/delete", conversationController.delete)
+            mHttpServer!!.createContext("/convos/sendMessage", conversationController.sendMessage)
+            mHttpServer!!.createContext("/convos/get", conversationController.getConvo)
 
             //users stuff
             mHttpServer!!.createContext("/get-history",userController.getUserHistory)
@@ -97,42 +85,6 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.stop(0)
             serverTextView.text = getString(R.string.server_down)
             serverButton.text = getString(R.string.start_server)
-        }
-    }
-
-    // Handler for root endpoint
-    private val rootHandler = HttpHandler { exchange ->
-        run {
-            // Get request method
-            when (exchange!!.requestMethod) {
-                "GET" -> {
-                    sendResponse(exchange, "Welcome to my server")
-                }
-
-            }
-        }
-
-    }
-
-    private val messageHandler = HttpHandler { httpExchange ->
-        run {
-            when (httpExchange!!.requestMethod) {
-                "GET" -> {
-                    // Get all messages
-                    sendResponse(httpExchange, "Would be all messages stringified json")
-                }
-                "POST" -> {
-                    val inputStream = httpExchange.requestBody
-
-                    val requestBody = streamToString(inputStream)
-                    val jsonBody = JSONObject(requestBody)
-                    // save message to database
-
-                    //for testing
-                    sendResponse(httpExchange, jsonBody.toString())
-
-                }
-            }
         }
     }
 }

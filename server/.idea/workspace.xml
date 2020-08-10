@@ -6,17 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2c4b757-4095-40d9-be6f-9c45664cb274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/requests/GetConversation.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/GetConversationResponse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/ConversationController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/ConversationController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/SearchController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/SearchController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/ConversationPreview.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/ConversationPreview.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/UserWithLastMessage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/api/schemas/responses/UserWithLastMessage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/UserDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/daos/UserDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/Message.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/database/entities/Message.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/RequestBodyParser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/ValidateRequestBody.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hashcode/serverapp/core/utils/ValidateRequestBody.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597017691449</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="get conversation with id">
+      <created>1597049685571</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1597049685571</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -252,7 +251,8 @@
     <MESSAGE value="add profile image" />
     <MESSAGE value="enhance search endpoint" />
     <MESSAGE value="enhance search" />
-    <option name="LAST_COMMIT_MESSAGE" value="enhance search" />
+    <MESSAGE value="get conversation with id" />
+    <option name="LAST_COMMIT_MESSAGE" value="get conversation with id" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Auto_Import" timestamp="1596836521429">
@@ -275,11 +275,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="540" y="65" width="575" height="694" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1596961494496" />
-    <state x="0" y="7" key="CommitChangelistDialog2" timestamp="1597017690415">
+    <state x="0" y="7" key="CommitChangelistDialog2" timestamp="1597049684412">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="331" y="7" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596280876447" />
-    <state x="0" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1597017690415" />
+    <state x="0" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1597049684412" />
     <state x="549" y="154" key="FileChooserDialogImpl" timestamp="1596279199279">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -325,11 +325,11 @@
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596275915466" />
     <state x="46" y="42" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596752344021" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1596918213795">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1597055952442">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1596280884241" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596918213795" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1597055952442" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1596753622898">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

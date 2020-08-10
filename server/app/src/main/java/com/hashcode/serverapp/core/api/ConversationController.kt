@@ -28,6 +28,25 @@ class ConversationController(private val context: Context) {
         }
     }
 
+    val sendMessage = HttpHandler { exchange ->
+        run {
+            // Get request method
+            when (exchange!!.requestMethod) {
+                "POST" -> sendMessage(exchange)
+                else -> Response.badRequestResponse(exchange)
+            }
+        }
+    }
+    val getConvo = HttpHandler { exchange ->
+        run {
+            // Get request method
+            when (exchange!!.requestMethod) {
+                "GET" -> getConversation(exchange)
+                else -> Response.badRequestResponse(exchange)
+            }
+        }
+    }
+
     private fun getConversation(exchange: HttpExchange){
         val user = AuthController().getUserFromToken(exchange)
         if(user == null){
