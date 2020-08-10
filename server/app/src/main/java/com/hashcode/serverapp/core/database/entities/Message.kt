@@ -9,7 +9,7 @@ data class Message(
     @PrimaryKey(autoGenerate = true) val messageId: Long = 0,
     val conversationId:Long,
     val text:String,
-    val sender_id:Int,
-    val receiver_id:Int,
+    val sender_id:Long,
+    val receiver_id:Long,
     val send_date:Date
 )

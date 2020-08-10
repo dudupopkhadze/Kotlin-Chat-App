@@ -1,7 +1,6 @@
 package com.hashcode.serverapp.core.utils
 
-import android.R.attr
-import android.util.Log
+import com.hashcode.serverapp.core.api.schemas.requests.PostSendMessage
 import com.hashcode.serverapp.core.database.entities.User
 import java.io.InputStream
 import java.util.*
@@ -36,6 +35,26 @@ object RequestBodyParser {
             return null
         }
         return getValueFromkey("query",body)
+    }
+
+    fun parseSendMessageRequest(requestBody: InputStream):PostSendMessage?{
+        val body = streamToString(requestBody)
+        if(!ValidateRequestBody.isValidSendMessageRequest(body)){
+            return null
+        }
+        return PostSendMessage(
+            conversationId = if(body.contains("conversationId")) getValueFromkey("conversationId",body).toLong() else null,
+            messageText = getValueFromkey("messageText",body),
+            receiverId = getValueFromkey("receiverId",body).toLong(),
+            senderId = getValueFromkey("senderId",body).toLong())
+    }
+
+    fun parseGetConversationRequest(requestBody: InputStream):Long?{
+        val body = streamToString(requestBody)
+        if(!ValidateRequestBody.isValidGetConversationRequest(body)){
+            return null
+        }
+        return getValueFromkey("conversationId",body).toLongOrNull()
     }
 
     fun parseDeleteConversationByIdRequest(requestBody:InputStream):Long?{

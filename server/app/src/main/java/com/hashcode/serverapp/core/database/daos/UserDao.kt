@@ -12,7 +12,6 @@ interface UserDao {
     @Query("SELECT * FROM  users WHERE userId == :userId")
     fun findById(userId:Long):User
 
-
     @Query("SELECT * FROM  users WHERE userId == :userId")
     fun getUserWithConversations(userId:Long):UserWithConversations
 
