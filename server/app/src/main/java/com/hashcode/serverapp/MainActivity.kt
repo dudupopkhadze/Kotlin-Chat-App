@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             mHttpServer = HttpServer.create(InetSocketAddress(port), 0)
             mHttpServer!!.executor = Executors.newCachedThreadPool()
             mHttpServer!!.createContext("/", rootHandler)
-            mHttpServer!!.createContext("/index", rootHandler)
+            mHttpServer!!.createContext("/test", userController.test)
             mHttpServer!!.createContext("/messages", messageHandler)
 
             //search

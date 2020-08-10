@@ -32,8 +32,12 @@ class ConversationController(private val context: Context) {
         GlobalScope.launch {
             val dao = appDatabase.conversationDao()
             val conversation = dao.findById(conversationId)
-            dao.deleteConversation(conversation)
-            Response.successfulRequestResponse(exchange,"Deleted")
+            if(conversation == null){
+                Response.notFoundResponse(exchange)
+            }else {
+                dao.deleteConversation(conversation)
+                Response.successfulRequestResponse(exchange, "Deleted")
+            }
         }
     }
     private fun sendMessage(exchange: HttpExchange){

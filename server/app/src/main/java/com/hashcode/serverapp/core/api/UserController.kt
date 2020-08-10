@@ -6,6 +6,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
 import com.hashcode.serverapp.core.api.schemas.responses.ConversationPreview
 import com.hashcode.serverapp.core.api.schemas.responses.UserConversationsHistory
@@ -24,6 +25,23 @@ class UserController(private val context: Context) {
                 "POST" -> createUser(exchange)
                 else -> Response.badRequestResponse(exchange)
             }
+        }
+    }
+
+    val test = HttpHandler { exchange ->
+        run {
+            // Get request method
+            when (exchange!!.requestMethod) {
+                "GET"-> test(exchange)
+                else -> Response.badRequestResponse(exchange)
+            }
+        }
+    }
+
+    private fun test(httpExchange: HttpExchange){
+        GlobalScope.launch {
+            val res = appDatabase.userDao().findByName("\'%kapka%\'")
+            Log.println(Log.DEBUG,"msg",res.size.toString() )
         }
     }
 
@@ -64,15 +82,20 @@ class UserController(private val context: Context) {
         GlobalScope.launch {
             val userWithConversations = appDatabase.userDao().getUserWithConversations(user.userId)
             val convosHistory = mutableListOf<ConversationPreview>()
-            userWithConversations.conversations.forEach {
-                val convosWithMessages = appDatabase.conversationDao().getConversationWithMessages(it.conversationId)
-                convosHistory.add(
-                    ConversationPreview(
-                        conversation = it,
-                        lastMessage = convosWithMessages.messages[convosWithMessages.messages.lastIndex].text
-                    )
-                )
+            if(userWithConversations != null){
+                userWithConversations?.conversations.forEach {
+                    val convosWithMessages = appDatabase.conversationDao().getConversationWithMessages(it.conversationId)
+                    if(convosWithMessages != null){
+                        convosHistory.add(
+                            ConversationPreview(
+                                conversation = it,
+                                lastMessage = convosWithMessages.messages[convosWithMessages.messages.lastIndex].text
+                            )
+                        )
+                    }
+                }
             }
+
             Response.successfulRequestResponse(exchange,Gson().toJson(
                 UserConversationsHistory(
                     user,
@@ -90,15 +113,27 @@ class UserController(private val context: Context) {
         }
         GlobalScope.launch {
             val user =  appDatabase.userDao().findById(id)
-            Response.successfulRequestResponse(exchange,Gson().toJson(user))
+            if(user == null){
+                Response.notFoundResponse(exchange)
+            }else {
+                Response.successfulRequestResponse(exchange, Gson().toJson(user))
+            }
         }
 
     }
 
     private fun getAllUsers(exchange: HttpExchange){
-        val users = appDatabase.userDao().getAll()
-        val toJson = Gson().toJson(users)
-        Response.successfulRequestResponse(exchange, toJson.toString())
+        GlobalScope.launch {
+            val users = appDatabase.userDao().getAll()
+            if(users == null){
+                Response.notFoundResponse(exchange)
+            }else{
+                val toJson = Gson().toJson(users)
+                Response.successfulRequestResponse(exchange, toJson.toString())
+            }
+
+        }
+
     }
 
     private fun createUser(exchange: HttpExchange){

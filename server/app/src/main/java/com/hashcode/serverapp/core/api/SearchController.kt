@@ -1,6 +1,7 @@
 package com.hashcode.serverapp.core.api
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
 import com.hashcode.serverapp.core.api.schemas.responses.SearchResult
 import com.hashcode.serverapp.core.api.schemas.responses.UserWithLastMessage
@@ -35,12 +36,19 @@ class SearchController (private val context: Context) {
                 Response.badRequestResponse(exchange)
             }else{
                 val sqlQuery ="%$query%"
+                Log.println(Log.DEBUG,"token",sqlQuery)
                 val result = mutableListOf<UserWithLastMessage>()
                 val users = appDatabase.userDao().findByName(sqlQuery)
+                Log.println(Log.DEBUG,"kenth",users.size.toString())
                 users.forEach {
                     val convo = appDatabase.conversationDao().getConversationForTwoUsers(user.userId,it.userId)
-                    val messages = appDatabase.conversationDao().getConversationWithMessages(convo.conversationId)
-                    result.add(UserWithLastMessage(it,messages.messages[messages.messages.lastIndex].text))
+                    if(convo != null){
+                        val messages = appDatabase.conversationDao().getConversationWithMessages(convo.conversationId)
+                        if(messages != null) result.add(UserWithLastMessage(it,messages.messages[messages.messages.lastIndex].text))
+                    } else {
+                        result.add((UserWithLastMessage(user)))
+                    }
+
                 }
                 Response.successfulRequestResponse(exchange,Gson().toJson(SearchResult(result)))
             }
