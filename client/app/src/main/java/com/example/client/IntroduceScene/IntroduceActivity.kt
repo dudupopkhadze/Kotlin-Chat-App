@@ -57,16 +57,29 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
 
 
         val x = retrofit.create(IntroduceSceneContract.APIlogin::class.java)
+<<<<<<< HEAD
         val usercall = x.addUser(IntroduceSceneContract.UserInfo(username, status, img)).also {
             it.enqueue(object :retrofit2.Callback<IntroduceSceneContract.CreateUserResponse>{
                 override fun onFailure(call: Call<IntroduceSceneContract.CreateUserResponse>, t: Throwable) {
                     Log.println(Log.DEBUG,"mdsd", t.message)
+=======
+        val usercall = x.addUser(IntroduceSceneContract.UserInfo(username,status,img))
+        usercall.enqueue(object :retrofit2.Callback<IntroduceSceneContract.UserInfo>{
+            override fun onFailure(call: Call<IntroduceSceneContract.UserInfo>, t: Throwable) {
+                Log.d("FAILUREe", "fail")
+>>>>>>> fa3fa041b116244d7c2fabf2eaf991b3e01d7143
 
                 }
 
+<<<<<<< HEAD
                 override fun onResponse(call: Call<IntroduceSceneContract.CreateUserResponse>, response: Response<IntroduceSceneContract.CreateUserResponse>) {
                     Log.println(Log.DEBUG,"mdsd", response.body().toString())
                 }
+=======
+            override fun onResponse(call: Call<IntroduceSceneContract.UserInfo>, response: Response<IntroduceSceneContract.UserInfo>) {
+                Log.d("RESPONSEe", "blaaaa")
+            }
+>>>>>>> fa3fa041b116244d7c2fabf2eaf991b3e01d7143
 
             })
         }

@@ -1,5 +1,12 @@
 
 .DS_Store
 
-*/.idea/*
-*/.gradlde/*
+*.iml
+client/.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+client/.gradle
+
+*.iml
+server/.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+server/.gradle
