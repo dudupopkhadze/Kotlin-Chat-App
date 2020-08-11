@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface IntroduceSceneContract {
 
     interface View{
-        fun register(username: String, status: String, img: String)
+        fun register(username: String, status: String, img: String): Boolean
     }
 
     interface Presenter {

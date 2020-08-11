@@ -1,9 +1,11 @@
 package com.example.client.IntroduceScene
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.client.HistoryScene.HistoryActivity
 import com.example.client.R
 import kotlinx.android.synthetic.main.activity_introduce.*
 import okhttp3.Callback
@@ -35,13 +37,16 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
             if(isEmpty){
                 Toast.makeText(this, "Fill both fields!", Toast.LENGTH_LONG).show();
             } else{
-                register(username.toString(), doing.toString(), "")
+                if(register(username.toString(), doing.toString(), "")){
+                    val intent = Intent(this, HistoryActivity::class.java)
+                    startActivity(intent)
+                }
             }
 
         }
     }
 
-    override fun register(username: String, status: String, img: String) {
+    override fun register(username: String, status: String, img: String): Boolean {
         val json: JSONObject = JSONObject()
         json.put("nickName", username)
         json.put("status", status)
@@ -54,6 +59,7 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        var res = false
 
 
         val x = retrofit.create(IntroduceSceneContract.APIlogin::class.java)
@@ -61,14 +67,17 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
             it.enqueue(object :retrofit2.Callback<IntroduceSceneContract.CreateUserResponse>{
                 override fun onFailure(call: Call<IntroduceSceneContract.CreateUserResponse>, t: Throwable) {
                     Log.println(Log.DEBUG, "mdsd", t.message)
+                    res = false
                 }
+
                 override fun onResponse(call: Call<IntroduceSceneContract.CreateUserResponse>, response: Response<IntroduceSceneContract.CreateUserResponse>) {
                     Log.println(Log.DEBUG,"mdsd", response.body().toString())
+                    res = true
                 }
 
             })
         }
 
-
+        return true
     }
 }
