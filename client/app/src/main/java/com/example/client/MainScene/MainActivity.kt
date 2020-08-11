@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.client.HistoryScene.HistoryActivity
 import com.example.client.IntroduceScene.IntroduceActivity
-import com.example.client.MessageScene.MessageActivity
 import com.example.client.R
 
 class MainActivity : AppCompatActivity(), MainSceneContract.View {
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity(), MainSceneContract.View {
 
         presenter = MainScenePresenterImpl()
         val sharedPref = getPreferences(Context.MODE_PRIVATE)
-        //sharedPref.edit().putString("username", "").commit()
+
         showLoginOrHistory(sharedPref)
     }
 

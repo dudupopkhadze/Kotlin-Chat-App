@@ -1,5 +1,6 @@
 package com.example.client.IntroduceScene
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -72,6 +73,13 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
 
                 override fun onResponse(call: Call<IntroduceSceneContract.CreateUserResponse>, response: Response<IntroduceSceneContract.CreateUserResponse>) {
                     Log.println(Log.DEBUG,"mdsd", response.body().toString())
+                    val token = response.body()?.accessToken
+                    val user = response.body()?.user?.nickName
+
+                    val sharedPref = getPreferences(Context.MODE_PRIVATE)
+                    sharedPref.edit().putString("username", user).commit()
+                    sharedPref.edit().putString("token", token).commit()
+
                     res = true
                 }
 
