@@ -60,12 +60,12 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
         val usercall = x.addUser(IntroduceSceneContract.UserInfo(username,status,img))
         usercall.enqueue(object :retrofit2.Callback<IntroduceSceneContract.UserInfo>{
             override fun onFailure(call: Call<IntroduceSceneContract.UserInfo>, t: Throwable) {
-                Log.println(Log.DEBUG,"mdsd", t.message)
+                Log.d("FAILUREe", "fail")
 
             }
 
             override fun onResponse(call: Call<IntroduceSceneContract.UserInfo>, response: Response<IntroduceSceneContract.UserInfo>) {
-                Log.println(Log.DEBUG,"mdsd", response.body()?.nickName)
+                Log.d("RESPONSEe", "blaaaa")
             }
 
         })
