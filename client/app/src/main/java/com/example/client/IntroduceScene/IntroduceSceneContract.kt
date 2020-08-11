@@ -19,8 +19,20 @@ interface IntroduceSceneContract {
     interface APIlogin{
         @Headers("Connection: close")
         @POST("users/add")
-        fun addUser(@Body userData: UserInfo): Call<UserInfo>
+        fun addUser(@Body userData: UserInfo): Call<CreateUserResponse>
     }
+
+    data class CreateUserResponse(
+            val  accessToken:String,
+            val user:User
+    )
+
+    data class User(
+            @SerializedName("userId") var userId:Long?,
+            @SerializedName("nickName") val nickName: String,
+            @SerializedName("status") val status: String,
+            @SerializedName("profileImage") val profileImage: String?
+    )
 
     data class UserInfo (
         @SerializedName("nickName") val nickName: String,

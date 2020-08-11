@@ -152,13 +152,16 @@ class UserController(private val context: Context) {
             if(user != null){
                 val id = appDatabase.userDao().insertUser(user)
                 val newUser = UserService.copyUserWithNewId(id,user)
-                Response.sendResponse(exchange, 200,
-                    Gson().toJson(
+                val vl =  Gson().toJson(
                         UserWithToken(
-                            user = newUser,
-                            accessToken = AuthService.generateAccessToken(newUser)
+                                user = newUser,
+                                accessToken = AuthService.generateAccessToken(newUser)
                         )
-                    ))
+                )
+                Log.println(Log.DEBUG,"new",vl)
+
+                Response.sendResponse(exchange, 200,
+                    vl)
             }else{
                 Response.badRequestResponse(exchange)
             }
