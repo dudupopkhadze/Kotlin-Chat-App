@@ -36,13 +36,6 @@ class HistoryActivity : AppCompatActivity(), HistorySceneContract.View {
 
         recycler_history.layoutManager = LinearLayoutManager(this)
 
-        GlobalScope.launch {
-            runOnUiThread{
-                recycler_history.adapter =
-                    HistoryAdapter()
-            }
-        }
-
     }
 
     override fun sendRequest(token: String) {
@@ -66,6 +59,11 @@ class HistoryActivity : AppCompatActivity(), HistorySceneContract.View {
                 ) {
                     val ls = response.body()?.history
                     Log.d("RESPONSE", ls.toString())
+                    GlobalScope.launch {
+                        runOnUiThread{
+                            recycler_history.adapter = ls?.let { it1 -> HistoryAdapter(it1) }
+                        }
+                    }
                 }
 
             })
