@@ -1,9 +1,12 @@
 package com.example.client.IntroduceScene
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.client.HistoryScene.HistoryActivity
 import com.example.client.R
 import kotlinx.android.synthetic.main.activity_introduce.*
 import okhttp3.Callback
@@ -36,39 +39,37 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
                 Toast.makeText(this, "Fill both fields!", Toast.LENGTH_LONG).show();
             } else{
                 register(username.toString(), doing.toString(), "")
+                val intent = Intent(this, HistoryActivity::class.java)
+                startActivity(intent)
             }
 
         }
     }
 
     override fun register(username: String, status: String, img: String) {
-        val json: JSONObject = JSONObject()
-        json.put("nickName", username)
-        json.put("status", status)
-        json.put("profileImage", img)
-
-
-
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-
-
         val x = retrofit.create(IntroduceSceneContract.APIlogin::class.java)
-        val usercall = x.addUser(IntroduceSceneContract.UserInfo(username, status, img)).also {
+        x.addUser(IntroduceSceneContract.UserInfo(username, status, img)).also {
             it.enqueue(object :retrofit2.Callback<IntroduceSceneContract.CreateUserResponse>{
                 override fun onFailure(call: Call<IntroduceSceneContract.CreateUserResponse>, t: Throwable) {
                     Log.println(Log.DEBUG, "mdsd", t.message)
                 }
+
                 override fun onResponse(call: Call<IntroduceSceneContract.CreateUserResponse>, response: Response<IntroduceSceneContract.CreateUserResponse>) {
                     Log.println(Log.DEBUG,"mdsd", response.body().toString())
+                    val token = response.body()?.accessToken
+                    val user = response.body()?.user?.nickName
+
+                    val sharedPref = getSharedPreferences("bla", Context.MODE_PRIVATE)
+                    sharedPref.edit().putString("username", user).commit()
+                    sharedPref.edit().putString("token", token).commit()
                 }
 
             })
         }
-
-
     }
 }

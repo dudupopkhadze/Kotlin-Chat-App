@@ -23,7 +23,7 @@ interface IntroduceSceneContract {
     }
 
     data class CreateUserResponse(
-            val  accessToken:String,
+            val accessToken:String,
             val user:User
     )
 
