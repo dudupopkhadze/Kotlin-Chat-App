@@ -20,7 +20,7 @@ class HistoryActivity : AppCompatActivity() {
 
         presenter = HistoryScenePresenterImpl()
 
-        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("bla", Context.MODE_PRIVATE)
 
         val token = presenter.getToken(sharedPref)
 

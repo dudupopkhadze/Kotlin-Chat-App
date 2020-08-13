@@ -76,7 +76,7 @@ class IntroduceActivity : AppCompatActivity(), IntroduceSceneContract.View {
                     val token = response.body()?.accessToken
                     val user = response.body()?.user?.nickName
 
-                    val sharedPref = getPreferences(Context.MODE_PRIVATE)
+                    val sharedPref = getSharedPreferences("bla", Context.MODE_PRIVATE)
                     sharedPref.edit().putString("username", user).commit()
                     sharedPref.edit().putString("token", token).commit()
 

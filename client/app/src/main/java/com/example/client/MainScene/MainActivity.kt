@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.client.HistoryScene.HistoryActivity
 import com.example.client.IntroduceScene.IntroduceActivity
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity(), MainSceneContract.View {
         setContentView(R.layout.activity_main)
 
         presenter = MainScenePresenterImpl()
-        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("bla", Context.MODE_PRIVATE)
 
         showLoginOrHistory(sharedPref)
     }
