@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface IntroduceSceneContract {
 
     interface View{
-        fun register(username: String, status: String, img: String): Boolean
+        fun register(username: String, status: String, img: String)
     }
 
     interface Presenter {
@@ -23,7 +23,7 @@ interface IntroduceSceneContract {
     }
 
     data class CreateUserResponse(
-            val  accessToken:String,
+            val accessToken:String,
             val user:User
     )
 

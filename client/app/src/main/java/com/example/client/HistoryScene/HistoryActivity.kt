@@ -7,9 +7,15 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.client.IntroduceScene.IntroduceSceneContract
 import com.example.client.R
+import com.example.client.api.user.UserConversationsHistoryResponse
+import com.example.client.api.user.historyRequest
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HistoryActivity : AppCompatActivity(), HistorySceneContract.View {
     lateinit var presenter: HistorySceneContract.Presenter
@@ -41,5 +47,28 @@ class HistoryActivity : AppCompatActivity(), HistorySceneContract.View {
 
     override fun sendRequest(token: String) {
         Log.d("tokeniii", token)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:5000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val x = retrofit.create(HistorySceneContract.APIhistory::class.java)
+        x.getHistory(token).also {
+            it.enqueue(object :retrofit2.Callback<UserConversationsHistoryResponse>{
+                override fun onFailure(call: Call<UserConversationsHistoryResponse>, t: Throwable) {
+                    Log.d("FAILLLL", "Response FAILED")
+                }
+
+                override fun onResponse(
+                    call: Call<UserConversationsHistoryResponse>,
+                    response: Response<UserConversationsHistoryResponse>
+                ) {
+                    val ls = response.body()?.history
+                    Log.d("RESPONSE", ls.toString())
+                }
+
+            })
+        }
     }
 }
