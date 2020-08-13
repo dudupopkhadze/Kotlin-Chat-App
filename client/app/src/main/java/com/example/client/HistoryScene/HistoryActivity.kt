@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class HistoryActivity : AppCompatActivity() {
+class HistoryActivity : AppCompatActivity(), HistorySceneContract.View {
     lateinit var presenter: HistorySceneContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class HistoryActivity : AppCompatActivity() {
         val token = presenter.getToken(sharedPref)
 
         if(token.isNotEmpty()){
-            presenter.sendRequest(token)
+            sendRequest(token)
         }
 
         recycler_history.layoutManager = LinearLayoutManager(this)
@@ -37,5 +37,9 @@ class HistoryActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun sendRequest(token: String) {
+        Log.d("tokeniii", token)
     }
 }

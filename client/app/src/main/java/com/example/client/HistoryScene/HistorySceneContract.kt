@@ -4,11 +4,10 @@ import android.content.SharedPreferences
 
 interface HistorySceneContract {
     interface View{
-
+        fun sendRequest(token: String)
     }
 
     interface Presenter {
-        fun sendRequest(token: String)
         fun getToken(pref: SharedPreferences): String
     }
 }
