@@ -67,11 +67,17 @@ object RequestBodyParser {
         return getValueFromkey("conversationId",body).toLongOrNull()
     }
 
-    private fun getValueFromkey(key:String,json:String):String{
+    private fun getValueFromkey(key:String,json:String,isStringValue:Boolean? = false):String{
         val startOfValue: Int = json.indexOf(key) + 3 +key.length
         val temp: String = json.substring(startOfValue)
+        var b = 0
+        if (isStringValue!!){
+            b =  temp.indexOf("\"")
+        }else if (temp.indexOf(",") != -1){
+            b = temp.indexOf(",")
+        }else b = temp.indexOf("}")
         val endOfValue = temp.indexOf("\"")
-        return temp.substring(0, endOfValue)
+        return temp.substring(0, b)
     }
 
     private fun streamToString(inputStream: InputStream): String {

@@ -1,6 +1,7 @@
 package com.hashcode.serverapp.core.api
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
 import com.hashcode.serverapp.core.api.schemas.responses.GetConversationResponse
 import com.hashcode.serverapp.core.database.AppDatabase
@@ -102,17 +103,21 @@ class ConversationController(private val context: Context) {
     }
 
     private fun sendMessage(exchange: HttpExchange){
+        GlobalScope.launch {
         val user = AuthController().getUserFromToken(exchange)
         if(user == null){
             Response.notAuthenticatedResponse(exchange)
-            return
+            return@launch
         }
+        Log.println(Log.DEBUG,"mdsg","priveli")
         val message = RequestBodyParser.parseSendMessageRequest(exchange.requestBody)
+
         if(message == null){
             Response.badRequestResponse(exchange)
-            return
+            return@launch
         }
-        GlobalScope.launch {
+        Log.println(Log.DEBUG,"mdsg","m3o43W")
+
             if(message.conversationId != null){
                 appDatabase.messageDao().insertMessage(Message(conversationId = message.conversationId,
                     receiver_id = message.receiverId,sender_id = message.senderId,text = message.messageText,send_date = Date()))
