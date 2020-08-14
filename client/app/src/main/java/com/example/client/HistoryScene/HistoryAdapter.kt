@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.client.R
+import com.example.client.api.user.ConversationPreview
 import kotlinx.android.synthetic.main.history_cell.view.*
 
-class HistoryAdapter: RecyclerView.Adapter<CustomViewHolder>() {
+class HistoryAdapter(val history: List<ConversationPreview>): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -17,7 +18,7 @@ class HistoryAdapter: RecyclerView.Adapter<CustomViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return history.count()
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
