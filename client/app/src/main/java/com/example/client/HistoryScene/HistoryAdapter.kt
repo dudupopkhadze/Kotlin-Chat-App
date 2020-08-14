@@ -1,9 +1,11 @@
 package com.example.client.HistoryScene
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.client.MessageScene.MessageActivity
 import com.example.client.R
 import com.example.client.api.user.ConversationPreview
 import kotlinx.android.synthetic.main.history_cell.view.*
@@ -27,6 +29,7 @@ class HistoryAdapter(private val history: List<ConversationPreview>): RecyclerVi
         val lastMessage = con.lastMessage
         val name = con.secondUser.nickName
         val img = con.secondUser.profileImage
+        val convoID = con.conversation.conversationId
 
         holder.view.nametext.text = name
         holder.view.messagetext.text = lastMessage
@@ -37,6 +40,14 @@ class HistoryAdapter(private val history: List<ConversationPreview>): RecyclerVi
 //                holder.view.profile_image.set
 //            }
 //        }
+
+        holder.view.setOnClickListener{
+            val context = holder.view.context
+            val intent = Intent(context, MessageActivity::class.java)
+            intent.putExtra("convoID", convoID)
+            context.startActivity(intent)
+        }
+
     }
 
 }
