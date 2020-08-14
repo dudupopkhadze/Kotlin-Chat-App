@@ -38,3 +38,7 @@ data class Message(
     val receiver_id:Long,
     val send_date:Date
 )
+
+data class convoRequest(
+    val conversationId:Long
+)

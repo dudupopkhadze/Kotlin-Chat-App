@@ -40,9 +40,9 @@ class ConversationController(private val context: Context) {
     }
     val getConvo = HttpHandler { exchange ->
         run {
-            // Get request method
+            // POST request method
             when (exchange!!.requestMethod) {
-                "GET" -> getConversation(exchange)
+                "POST" -> getConversation(exchange)
                 else -> Response.badRequestResponse(exchange)
             }
         }

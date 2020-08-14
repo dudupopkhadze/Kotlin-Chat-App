@@ -55,6 +55,7 @@ object RequestBodyParser {
     fun parseGetConversationRequest(requestBody: InputStream):Long?{
         val body = streamToString(requestBody)
 
+        Log.println(Log.DEBUG,"Sdsdsd",body)
 
         if(!ValidateRequestBody.isValidGetConversationRequest(body)){
             return null
