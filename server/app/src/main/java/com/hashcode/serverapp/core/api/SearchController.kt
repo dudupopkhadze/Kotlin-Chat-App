@@ -46,7 +46,9 @@ class SearchController (private val context: Context) {
                         val messages = appDatabase.conversationDao().getConversationWithMessages(convo.conversationId)
                         if(messages != null) result.add(UserWithLastMessage(it,convo.conversationId,messages.messages[messages.messages.lastIndex].text))
                     } else {
-                        result.add((UserWithLastMessage(user)))
+                        if(user.userId != it.userId) {
+                            result.add((UserWithLastMessage(it)))
+                        }
                     }
 
                 }
