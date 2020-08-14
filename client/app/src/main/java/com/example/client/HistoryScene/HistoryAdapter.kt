@@ -8,7 +8,7 @@ import com.example.client.R
 import com.example.client.api.user.ConversationPreview
 import kotlinx.android.synthetic.main.history_cell.view.*
 
-class HistoryAdapter(val history: List<ConversationPreview>): RecyclerView.Adapter<CustomViewHolder>() {
+class HistoryAdapter(private val history: List<ConversationPreview>): RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -22,9 +22,21 @@ class HistoryAdapter(val history: List<ConversationPreview>): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.view.nametext.text = "John Doe"
-        holder.view.messagetext.text = "On my way home but I needed to stop by the book store to..."
+        val con = history[position]
+
+        val lastMessage = con.lastMessage
+        val name = con.secondUser.nickName
+        val img = con.secondUser.profileImage
+
+        holder.view.nametext.text = name
+        holder.view.messagetext.text = lastMessage
         holder.view.datetext.text = "5 min"
+
+//        if (img != null) {
+//            if(img.isNotEmpty()){
+//                holder.view.profile_image.set
+//            }
+//        }
     }
 
 }

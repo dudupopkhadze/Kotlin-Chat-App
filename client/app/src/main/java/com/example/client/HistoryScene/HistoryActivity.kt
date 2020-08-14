@@ -58,7 +58,7 @@ class HistoryActivity : AppCompatActivity(), HistorySceneContract.View {
                     response: Response<UserConversationsHistoryResponse>
                 ) {
                     val ls = response.body()?.history
-                    Log.d("RESPONSE", ls.toString())
+                    Log.d("RESPONSE", response.body().toString())
                     GlobalScope.launch {
                         runOnUiThread{
                             recycler_history.adapter = ls?.let { it1 -> HistoryAdapter(it1) }

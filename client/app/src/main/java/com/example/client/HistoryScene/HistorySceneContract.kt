@@ -16,7 +16,6 @@ interface HistorySceneContract {
     }
 
     interface APIhistory{
-        //@Header("access-token")
         @GET("get-history")
         fun getHistory(@Header("access-token") token: String): Call<UserConversationsHistoryResponse>
     }
