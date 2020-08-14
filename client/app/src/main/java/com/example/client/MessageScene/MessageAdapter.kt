@@ -25,16 +25,22 @@ class MessageAdapter(private val convo: GetConversationResponse) : RecyclerView.
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return convo.conversationInfo.messages.count()
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.view.messageID.text = "Kotlin is a cross-platform, statically typed, general-purpose programming language with type inference. Kotlin is designed to interoperate fully with Java, and the JVM version of its standard library depends on the Java Class Library,[3] but type inference allows its syntax to be more concise. Kotlin mainly targets the JVM, but also compiles to JavaScript or native code (via LLVM). Language development costs are borne by JetBrains, while the Kotlin Foundation protects the Kotlin trademark."
-        holder.view.timeID.text = "22:45"
+        val msgTxt = convo.conversationInfo.messages[position].text
+        val dt = convo.conversationInfo.messages[position].send_date.toString()
+
+        holder.view.messageID.text = msgTxt
+        holder.view.timeID.text = dt
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(position%2==0){
+        val receiver = convo.conversationInfo.messages[position].receiver_id
+        val otherUser = convo.partner.userId
+
+        if(receiver==otherUser){
             return 0
         }
 

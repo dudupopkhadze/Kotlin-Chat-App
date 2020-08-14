@@ -58,6 +58,15 @@ class MessageActivity : AppCompatActivity(), MessageSceneContract.View {
                         val ls = response.body()
                         Log.d("msgrsp", ls.toString())
 
+                        GlobalScope.launch {
+                            runOnUiThread{
+                                nameTxt.text = ls?.partner?.nickName
+                                statusTxt.text = ls?.partner?.status
+
+                                recycler_message.adapter = ls?.let { it1 -> MessageAdapter(it1) }
+                                recycler_message.smoothScrollToPosition((recycler_message.adapter as MessageAdapter).itemCount)
+                            }
+                        }
                     }
 
                 })
