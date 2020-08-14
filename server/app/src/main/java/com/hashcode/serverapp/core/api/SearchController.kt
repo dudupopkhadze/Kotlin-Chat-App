@@ -16,9 +16,9 @@ class SearchController (private val context: Context) {
     private val appDatabase = AppDatabase.getInstance(context)
     val search = HttpHandler { exchange ->
         run {
-            // Get request method
+            // POST request method
             when (exchange!!.requestMethod) {
-                "GET" -> searchWithNickname(exchange)
+                "POST" -> searchWithNickname(exchange)
                 else -> Response.badRequestResponse(exchange)
             }
         }

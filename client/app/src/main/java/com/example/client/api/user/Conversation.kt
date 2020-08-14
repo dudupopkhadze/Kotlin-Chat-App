@@ -49,3 +49,17 @@ data class PostSendMessage(
     val senderId:Long,
     val receiverId:Long
 )
+
+data class searchRequest(
+    val query: String
+)
+
+data class UserWithLastMessage(
+    val user:User,
+    val conversationId:Long? = null,
+    val lastMessage: String? = null
+)
+
+data class SearchResult(
+    val results:List<UserWithLastMessage>
+)
