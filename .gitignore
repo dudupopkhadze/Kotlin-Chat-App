@@ -10,3 +10,6 @@ client/.gradle
 server/.idea
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 server/.gradle
+
+server/local.properties
+client/local.properties

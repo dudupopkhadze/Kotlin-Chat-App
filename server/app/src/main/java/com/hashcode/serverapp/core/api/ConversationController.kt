@@ -64,6 +64,7 @@ class ConversationController(private val context: Context) {
 
     private fun getConversationInfo(exchange: HttpExchange,conversationId:Long,user:User){
         GlobalScope.launch {
+            Log.println(Log.DEBUG,"dsdsd","sdasdasdasd")
             val conversation = appDatabase.conversationDao().getConversationWithMessages(conversationId)
             if(conversation != null){
                 val otherUserId =
@@ -116,7 +117,7 @@ class ConversationController(private val context: Context) {
             Response.badRequestResponse(exchange)
             return@launch
         }
-        Log.println(Log.DEBUG,"mdsg","m3o43W")
+        Log.println(Log.DEBUG,"mdsg",message.toString())
 
             if(message.conversationId != null){
                 appDatabase.messageDao().insertMessage(Message(conversationId = message.conversationId,

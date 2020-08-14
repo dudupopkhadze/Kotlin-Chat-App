@@ -74,16 +74,19 @@ class UserController(private val context: Context) {
     }
 
     private fun getUserConversationsHistory(exchange:HttpExchange){
-        val user = AuthController().getUserFromToken(exchange)
-        if(user == null){
-            Response.notAuthenticatedResponse(exchange)
-            return
-        }
         GlobalScope.launch {
-            val userWithConversations = appDatabase.userDao().getUserWithConversations(user.userId)
+
+            val user = AuthController().getUserFromToken(exchange)
+            if(user == null){
+                Response.notAuthenticatedResponse(exchange)
+                return@launch
+            }
+            val userWithConversations = appDatabase.conversationDao().getAll().filter { it.firstUserId == user.userId || it.secondUserId==user.userId }
+            Log.println(Log.DEBUG,"Sdsdsd",userWithConversations.toString())
             val convosHistory = mutableListOf<ConversationPreview>()
             if(userWithConversations != null){
-                userWithConversations?.conversations.forEach {
+                userWithConversations?.forEach {
+                    Log.println(Log.DEBUG,"sdsddsd",it.toString())
                     val convosWithMessages = appDatabase.conversationDao().getConversationWithMessages(it.conversationId)
                     if(convosWithMessages != null){
                         val otherUserId =

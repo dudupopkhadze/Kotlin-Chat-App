@@ -15,11 +15,12 @@ object RequestBodyParser {
             return null
         }
         return if(body.contains("profileImage")){
-            User(nickName = getValueFromkey("nickName",body),
-                status = getValueFromkey("status",body),profileImage = getValueFromkey("profileImage",body))
+            User(nickName = getValueFromkey("nickName",body,true),
+                status = getValueFromkey("status",body,true),
+                    profileImage = getValueFromkey("profileImage",body,true))
         } else {
-            User(nickName = getValueFromkey("nickName",body),
-                status = getValueFromkey("status",body))
+            User(nickName = getValueFromkey("nickName",body,true),
+                status = getValueFromkey("status",body,true))
         };
     }
 
@@ -28,7 +29,7 @@ object RequestBodyParser {
         if(!ValidateRequestBody.isValidGetUserByIdRequest(body)){
             return null
         }
-        return getValueFromkey("userId",body).toLongOrNull()
+        return getValueFromkey("userId",body,false).toLongOrNull()
     }
 
     fun parseSearchWithNickname(requestBody: InputStream):String?{
@@ -36,7 +37,7 @@ object RequestBodyParser {
         if(!ValidateRequestBody.isValidSearchWithNicknameRequest(body)){
             return null
         }
-        return getValueFromkey("query",body)
+        return getValueFromkey("query",body,true)
     }
 
     fun parseSendMessageRequest(requestBody: InputStream):PostSendMessage?{
@@ -45,18 +46,23 @@ object RequestBodyParser {
             return null
         }
         return PostSendMessage(
-            conversationId = if(body.contains("conversationId")) getValueFromkey("conversationId",body).toLong() else null,
-            messageText = getValueFromkey("messageText",body),
-            receiverId = getValueFromkey("receiverId",body).toLong(),
-            senderId = getValueFromkey("senderId",body).toLong())
+            conversationId = if(body.contains("conversationId")) getValueFromkey("conversationId",body,false).toLong() else null,
+            messageText = getValueFromkey("messageText",body,true),
+            receiverId = getValueFromkey("receiverId",body,false).toLong(),
+            senderId = getValueFromkey("senderId",body,false).toLong())
     }
 
     fun parseGetConversationRequest(requestBody: InputStream):Long?{
         val body = streamToString(requestBody)
+
+
         if(!ValidateRequestBody.isValidGetConversationRequest(body)){
             return null
         }
-        return getValueFromkey("conversationId",body).toLongOrNull()
+
+        Log.println(Log.DEBUG,"Sdsdsd","Asasasasas")
+
+        return getValueFromkey("conversationId",body,false).toLong()
     }
 
     fun parseDeleteConversationByIdRequest(requestBody:InputStream):Long?{
@@ -64,19 +70,20 @@ object RequestBodyParser {
         if(!ValidateRequestBody.isValidDeleteConversationByIdRequest(body)){
             return null
         }
-        return getValueFromkey("conversationId",body).toLongOrNull()
+        return getValueFromkey("conversationId",body,false).toLongOrNull()
     }
 
-    private fun getValueFromkey(key:String,json:String,isStringValue:Boolean? = false):String{
-        val startOfValue: Int = json.indexOf(key) + 3 +key.length
+    private fun getValueFromkey(key:String,json:String,isStringValue:Boolean ):String{
+        val offset = if(isStringValue) 3 else 2
+        val startOfValue: Int = json.indexOf(key) + offset +key.length
         val temp: String = json.substring(startOfValue)
         var b = 0
-        if (isStringValue!!){
+        if (isStringValue){
             b =  temp.indexOf("\"")
         }else if (temp.indexOf(",") != -1){
             b = temp.indexOf(",")
         }else b = temp.indexOf("}")
-        val endOfValue = temp.indexOf("\"")
+
         return temp.substring(0, b)
     }
 
