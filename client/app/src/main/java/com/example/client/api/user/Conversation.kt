@@ -42,3 +42,10 @@ data class Message(
 data class convoRequest(
     val conversationId:Long
 )
+
+data class PostSendMessage(
+    val conversationId:Long? = null,
+    val messageText:String,
+    val senderId:Long,
+    val receiverId:Long
+)

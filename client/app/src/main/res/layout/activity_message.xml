@@ -31,6 +31,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/messageTextID"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/type_message_shape"
