@@ -2,7 +2,6 @@ package com.example.client.HistoryScene
 
 import android.content.SharedPreferences
 import com.example.client.api.user.UserConversationsHistoryResponse
-import com.example.client.api.user.historyRequest
 import retrofit2.Call
 import retrofit2.http.*
 

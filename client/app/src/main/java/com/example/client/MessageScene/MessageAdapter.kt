@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.client.HistoryScene.CustomViewHolder
 import com.example.client.R
+import com.example.client.api.user.GetConversationResponse
 import kotlinx.android.synthetic.main.message_cell_1.view.*
 
-class MessageAdapter: RecyclerView.Adapter<CustomViewHolder>() {
+class MessageAdapter(val convoInfo: GetConversationResponse): RecyclerView.Adapter<CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 

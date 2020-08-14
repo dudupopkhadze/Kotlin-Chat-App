@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.client.IntroduceScene.IntroduceSceneContract
 import com.example.client.R
 import com.example.client.api.user.UserConversationsHistoryResponse
-import com.example.client.api.user.historyRequest
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
